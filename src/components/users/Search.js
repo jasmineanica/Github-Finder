@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 
 class Search extends Component {
   state = {
     text: ''
+  };
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired
   };
 
   onChange = e => {
@@ -12,7 +19,10 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state.text);
+    //sends user inputted text back to App.js
+    this.props.searchUsers(this.state.text);
+    //this clears the search form again
+    this.setState({ text: ''})
   }
 
   render() {
@@ -31,7 +41,18 @@ class Search extends Component {
             value='Search'
             className='btn btn-dark btn-block'
           />
-          </form>
+        </form>
+
+        {/* Clear button display logic */}
+        {this.props.showClear && (
+          <button
+            className="btn btn-light btn-block"
+            onClick={this.props.clearUsers}
+          >
+            Clear
+          </button>
+        )}
+
       </div>
     );
   }
