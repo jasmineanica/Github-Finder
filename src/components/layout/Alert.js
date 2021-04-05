@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Alert = ({ alert }) => {
 
@@ -11,10 +10,5 @@ const Alert = ({ alert }) => {
     )
   );
 }
-
-//sets expected types and errors when not the expected type
-Alert.propTypes = {
-  alert: PropTypes.object.isRequired
-};
 
 export default Alert;
