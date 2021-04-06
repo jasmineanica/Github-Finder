@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import User from './components/users/User';
+import ExactMatch from './components/users/ExactMatch'
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import About from './components/pages/About';
@@ -23,8 +24,9 @@ class App extends Component {
     this.setState({loading: true});
     const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
     this.setState({ users: res.data.items, loading: false });
-    this.getUser(res.data.items[0].login);
+    this.getUser(res.data.items[0].login)
   };
+
 
   // Search Github user
   getUser = async username => {
@@ -43,7 +45,7 @@ class App extends Component {
 
   // Clear users from state
   clearUsers = () => {
-    this.setState({ users: [], loading: false, user: {} });
+    this.setState({ users: [], loading: false, user: {}, repos: [] });
   };
 
   // Set Alert
@@ -70,6 +72,14 @@ class App extends Component {
                   clearUsers={this.clearUsers}
                   showClear={users.length > 0 ? true: false}
                   setAlert={this.setAlert}
+                />
+                <ExactMatch
+                  getUser={this.getUser}
+                  getUserRepos={this.getUserRepos}
+                  showUser={users.length > 0 ? true: false}
+                  user={user}
+                  repos={repos}
+                  loading={loading}
                 />
                 <Users loading={loading} users={users}/>
                 </Fragment>
