@@ -9,6 +9,7 @@ const User = ({ user, loading, repos, match, getUser, getUserRepos}) => {
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
+    // eslint-disable-next-line
   }, []);
 
   const {
@@ -24,7 +25,6 @@ const User = ({ user, loading, repos, match, getUser, getUserRepos}) => {
     following,
     public_repos,
     public_gists,
-    hirable
   } = user;
 
   if (loading) {
@@ -40,6 +40,7 @@ const User = ({ user, loading, repos, match, getUser, getUserRepos}) => {
             <img
               src={avatar_url}
               className="round-img"
+              alt=''
               style={{ width: '150px' }}
             />
             <h1>{name}</h1>
