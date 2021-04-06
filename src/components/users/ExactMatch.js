@@ -1,21 +1,17 @@
 import React, { Fragment, Component } from 'react';
 import Spinner from '../layout/Spinner';
-import Repos from '../repos/Repos';
 import PropTypes from 'prop-types';
 
 export class ExactMatch extends Component {
   static propTypes = {
       loading: PropTypes.bool.isRequired,
       user: PropTypes.object.isRequired,
-      showUsers: PropTypes.func.isRequired,
-      repos: PropTypes.array.isRequired,
+      showUser: PropTypes.bool.isRequired,
       getUser: PropTypes.func.isRequired,
-      getUserRepos: PropTypes.func.isRequired
   }
 
   componentDidMount() {
     this.props.getUser(this.props.user.login);
-    this.props.getUserRepos(this.props.user.login);
   }
 
   render() {
@@ -28,14 +24,9 @@ export class ExactMatch extends Component {
       login,
       company,
       html_url,
-      followers,
-      following,
-      public_repos,
-      public_gists,
-      hirable
     } = this.props.user;
 
-    const { loading, repos, showUser } = this.props;
+    const { loading, showUser } = this.props;
 
     if (loading) {
       return <Spinner/>
@@ -52,6 +43,7 @@ export class ExactMatch extends Component {
               <img
                 src={avatar_url}
                 className="round-img"
+                alt=''
                 style={{ width: '150px' }}
               />
               <h1>{name}</h1>

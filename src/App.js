@@ -75,10 +75,8 @@ class App extends Component {
                 />
                 <ExactMatch
                   getUser={this.getUser}
-                  getUserRepos={this.getUserRepos}
                   showUser={users.length > 0 ? true: false}
                   user={user}
-                  repos={repos}
                   loading={loading}
                 />
                 <Users loading={loading} users={users}/>
