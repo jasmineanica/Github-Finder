@@ -21,10 +21,11 @@ class App extends Component {
   searchUsers = async text => {
     this.setState({loading: true});
     const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-    this.setState({ users: res.data.items, loading: false});
+    this.setState({ users: res.data.items, loading: false });
+    this.getUser(res.data.items[0].login);
   };
 
-  // Search Github users
+  // Search Github user
   getUser = async username => {
     this.setState({loading: true});
     const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
@@ -34,7 +35,7 @@ class App extends Component {
 
   // Clear users from state
   clearUsers = () => {
-    this.setState({ users: [], loading: false});
+    this.setState({ users: [], loading: false, user: {} });
   };
 
   // Set Alert
@@ -45,7 +46,7 @@ class App extends Component {
   };
 
   render() {
-    const {users, user, loading} = this.state;
+    const {users, user, loading, first} = this.state;
 
     return (
       <Router>
