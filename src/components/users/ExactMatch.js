@@ -1,8 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
+import GithubContext from "../../context/github/githubContext";
 
-const ExactMatch = ({ user, loading, showUser, getUser}) => {
+const ExactMatch = () => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user } = githubContext;
 
   const {
     name,
@@ -25,7 +27,7 @@ const ExactMatch = ({ user, loading, showUser, getUser}) => {
   } else {
     return (
       <Fragment>
-      { showUser && (
+      { githubContext.users.length > 0 && (
         <Fragment>
         <div className="headers">
           <h2> Exact Match </h2>
@@ -85,10 +87,4 @@ const ExactMatch = ({ user, loading, showUser, getUser}) => {
   }
 }
 
-ExactMatch.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired,
-    showUser: PropTypes.bool.isRequired,
-    getUser: PropTypes.func.isRequired,
-}
 export default ExactMatch;
