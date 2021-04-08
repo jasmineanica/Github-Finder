@@ -21,9 +21,9 @@ const App = () => {
         <div className="container">
           <Alert />
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/about" component={About}/>
-            <Route exact path="/user/:login" component={User}/>
+            <Route exact path= {process.env.PUBLIC_URL + "/"} component={Home}/>
+            <Route exact path= {process.env.PUBLIC_URL + "/about" } component={About}/>
+            <Route exact path= {process.env.PUBLIC_URL + "/user/:login"} component={User}/>
             <Route component={NotFound}/>
 
           </Switch>
