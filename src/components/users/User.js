@@ -35,7 +35,7 @@ const User = ({ match}) => {
   } else {
     return (
       <Fragment>
-        <Link to='/' className='btn btn-light'>
+        <Link to= {process.env.PUBLIC_URL + '/'} className='btn btn-light'>
           Back to Search
         </Link>
         <div className="card grid-2">

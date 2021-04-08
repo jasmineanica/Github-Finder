@@ -11,8 +11,8 @@ const Navbar = ({icon, title}) => {
       </h1>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
-          <Link to='/about'>About</Link>
+          <Link to={process.env.PUBLIC_URL + '/'}>Home</Link>
+          <Link to={process.env.PUBLIC_URL + '/about'}>About</Link>
         </li>
       </ul>
     </nav>
